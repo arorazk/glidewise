@@ -39,6 +39,17 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# ── Hide GitHub toolbar ──────────────────────────────────────────────────────
+st.markdown("""
+<style>
+#MainMenu {visibility: hidden;}
+header [data-testid="stToolbar"] {visibility: hidden;}
+footer {visibility: hidden;}
+[data-testid="stToolbarActions"] {display: none;}
+a[href*="github"] {display: none !important;}
+</style>
+""", unsafe_allow_html=True)
+
 # ── Custom CSS ───────────────────────────────────────────────────────────────
 st.markdown(
     """
