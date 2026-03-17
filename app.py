@@ -43,18 +43,12 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* Sidebar background */
-        [data-testid="stSidebar"] { background-color: #F0F4FA; }
-
         /* Metric card */
         [data-testid="stMetric"] {
-            background: #FFFFFF;
-            border: 1px solid #DDE4EF;
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 12px 16px;
         }
-        [data-testid="stMetricLabel"] { font-size: 13px !important; color: #5A6A7E; }
-        [data-testid="stMetricValue"] { font-size: 22px !important; font-weight: 700; color: #1A3A5C; }
 
         /* Tab styling */
         button[data-baseweb="tab"] { font-weight: 600; font-size: 14px; }
@@ -69,9 +63,15 @@ st.markdown(
             color: white;
         }
 
-        h1 { color: #1A3A5C !important; }
-        h2 { color: #1A3A5C !important; }
-        h3 { color: #2C5282 !important; }
+        /* Sidebar section label */
+        .sidebar-section {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.55;
+            margin: 14px 0 4px 0;
+        }
     </style>
     """,
     unsafe_allow_html=True,
@@ -80,14 +80,16 @@ st.markdown(
 
 # ── Sidebar inputs ───────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚙️ Your Profile")
-    st.markdown("---")
+    st.markdown("## 📈 GlideWise")
+    st.caption("Personal Investment Planner")
+    st.divider()
 
-    st.markdown("**Personal Details**")
+    st.markdown('<p class="sidebar-section">👤 Personal</p>', unsafe_allow_html=True)
     current_age = st.slider("Current Age", 18, 70, 30, step=1)
     retirement_age = st.slider("Retirement Age", current_age + 5, 80, 65, step=1)
+    st.caption(f"Investment horizon: **{retirement_age - current_age} years**")
 
-    st.markdown("**Finances**")
+    st.markdown('<p class="sidebar-section">💰 Finances</p>', unsafe_allow_html=True)
     annual_salary = st.number_input(
         "Annual Salary ($)", min_value=0, max_value=1_000_000,
         value=90_000, step=5_000, format="%d"
@@ -101,7 +103,7 @@ with st.sidebar:
         value=50_000, step=5_000, format="%d"
     )
 
-    st.markdown("**Goals & Preferences**")
+    st.markdown('<p class="sidebar-section">🎯 Goals</p>', unsafe_allow_html=True)
     risk_tolerance = st.selectbox(
         "Risk Tolerance",
         ["Conservative", "Moderate", "Aggressive"],
@@ -112,15 +114,14 @@ with st.sidebar:
         value=2_000_000, step=100_000, format="%d"
     )
 
-    st.markdown("---")
+    st.markdown('<p class="sidebar-section">⚙️ Simulation</p>', unsafe_allow_html=True)
     n_sims = st.select_slider(
         "Monte Carlo Paths", options=[500, 1_000, 2_000, 5_000], value=1_000
     )
 
-    st.markdown("---")
+    st.divider()
     st.caption(
-        "⚠️ **Disclaimer:** GlideWise is an educational planning tool, "
-        "not financial advice. All projections are illustrative."
+        "⚠️ Educational tool only · Not financial advice"
     )
 
 
@@ -152,10 +153,15 @@ rebalance_schedule = build_rebalance_schedule(
 
 
 # ── Header ───────────────────────────────────────────────────────────────────
-st.markdown("# 📈 GlideWise")
-st.markdown(
-    "**Personal Investment Planner** · 3-ETF allocation · Glide path · Monte Carlo simulation"
-)
+col_title, col_author = st.columns([3, 1])
+with col_title:
+    st.markdown("# 📈 GlideWise")
+    st.markdown(
+        "**Personal Investment Planner** · 3-ETF allocation · Glide path · Monte Carlo simulation"
+    )
+with col_author:
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("Built by **Parv Arora**")
 st.markdown("---")
 
 

@@ -178,7 +178,7 @@ def generate_pdf_report(
 
     # ── Header ──────────────────────────────────────────────────────────────
     story.append(Paragraph("GlideWise — Investment Plan Summary", title_st))
-    story.append(Paragraph("Personal finance planning tool · Not financial advice", sub_st))
+    story.append(Paragraph("Personal finance planning tool · Built by Parv Arora · Not financial advice", sub_st))
     story.append(HRFlowable(width=W, thickness=1.5, color=NAVY, spaceAfter=6))
 
     # ── Two-column layout: Inputs | Allocation + Outcomes ───────────────────
