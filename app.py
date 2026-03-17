@@ -39,12 +39,16 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Hide GitHub link and footer only ─────────────────────────────────────────
+# ── Hide GitHub icon and footer ───────────────────────────────────────────────
 st.markdown("""
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
+header [data-testid="stToolbar"] {visibility: hidden;}
+[data-testid="stToolbarActions"] {display: none;}
 a[href*="github"] {display: none !important;}
+/* Always keep sidebar expand arrow visible */
+[data-testid="collapsedControl"] {display: flex !important; visibility: visible !important;}
 /* Desktop only: lock sidebar open */
 @media (min-width: 768px) {
     [data-testid="stSidebarCollapseButton"] {display: none !important;}
