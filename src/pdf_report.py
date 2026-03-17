@@ -178,8 +178,7 @@ def generate_pdf_report(
 
     # ── Header ──────────────────────────────────────────────────────────────
     story.append(Paragraph("GlideWise — Investment Plan Summary", title_st))
-    story.append(Paragraph("Personal finance planning tool · Not financial advice", sub_st))
-    story.append(HRFlowable(width=W, thickness=1.5, color=NAVY, spaceAfter=6))
+    story.append(HRFlowable(width=W, thickness=1.5, color=NAVY, spaceBefore=4, spaceAfter=6))
 
     # ── Two-column layout: Inputs | Allocation + Outcomes ───────────────────
     horizon = user_inputs["retirement_age"] - user_inputs["current_age"]
@@ -247,14 +246,11 @@ def generate_pdf_report(
     # ── Disclaimer ───────────────────────────────────────────────────────────
     story.append(HRFlowable(width=W, thickness=0.5, color=colors.HexColor("#CCCCCC"),
                              spaceBefore=6, spaceAfter=4))
-    footer_right_st = style("Normal", fontSize=7, textColor=MID_GRAY, alignment=TA_LEFT)
+    footer_right_st = style("Normal", fontSize=7.5, textColor=MID_GRAY, alignment=TA_LEFT)
     footer_table = Table(
         [[
             Paragraph(
-                "DISCLAIMER: GlideWise is an educational planning tool and does not constitute financial advice. "
-                "Projections are based on simplified return assumptions and log-normal return models. "
-                "Past performance is not indicative of future results. "
-                "Consult a qualified financial advisor before making investment decisions.",
+                "For educational purposes only. Not financial advice. Consult a qualified advisor before investing.",
                 disc_st,
             ),
             Paragraph("Parv Arora", footer_right_st),
