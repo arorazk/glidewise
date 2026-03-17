@@ -314,7 +314,7 @@ with tab2:
     # Expected return and volatility over the glide path
     st.markdown("---")
     st.subheader("Portfolio Risk/Return Through Time")
-    stats_df = pd.DataFrame(glidepath_stats, index=ages)
+    stats_df = pd.DataFrame(glidepath_stats, index=ages[:-1])
     stats_df.index.name = "Age"
     stats_df["expected_return"] = (stats_df["expected_return"] * 100).round(2)
     stats_df["volatility"] = (stats_df["volatility"] * 100).round(2)
