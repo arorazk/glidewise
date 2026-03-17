@@ -178,7 +178,7 @@ def generate_pdf_report(
 
     # ── Header ──────────────────────────────────────────────────────────────
     story.append(Paragraph("GlideWise — Investment Plan Summary", title_st))
-    story.append(Paragraph("Personal finance planning tool · Built by Parv Arora · Not financial advice", sub_st))
+    story.append(Paragraph("Personal finance planning tool · Not financial advice", sub_st))
     story.append(HRFlowable(width=W, thickness=1.5, color=NAVY, spaceAfter=6))
 
     # ── Two-column layout: Inputs | Allocation + Outcomes ───────────────────
@@ -247,13 +247,22 @@ def generate_pdf_report(
     # ── Disclaimer ───────────────────────────────────────────────────────────
     story.append(HRFlowable(width=W, thickness=0.5, color=colors.HexColor("#CCCCCC"),
                              spaceBefore=6, spaceAfter=4))
-    story.append(Paragraph(
-        "DISCLAIMER: GlideWise is an educational planning tool and does not constitute financial advice. "
-        "Projections are based on simplified return assumptions and log-normal return models. "
-        "Past performance is not indicative of future results. "
-        "Consult a qualified financial advisor before making investment decisions.",
-        disc_st,
-    ))
+    footer_right_st = style("Normal", fontSize=7, textColor=MID_GRAY, alignment=TA_LEFT)
+    footer_table = Table(
+        [[
+            Paragraph(
+                "DISCLAIMER: GlideWise is an educational planning tool and does not constitute financial advice. "
+                "Projections are based on simplified return assumptions and log-normal return models. "
+                "Past performance is not indicative of future results. "
+                "Consult a qualified financial advisor before making investment decisions.",
+                disc_st,
+            ),
+            Paragraph("Parv Arora", footer_right_st),
+        ]],
+        colWidths=[W * 0.82, W * 0.18],
+    )
+    footer_table.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "BOTTOM")]))
+    story.append(footer_table)
 
     doc.build(story)
     buf.seek(0)
